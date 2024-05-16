@@ -5,10 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>陆十九的主页</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .timeline {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .timeline-item {
+        width: 80%;
+        margin: 20px 0;
+        display: flex;
+        justify-content: center;
+      }
+
+      .left-item {
+        justify-content: flex-start;
+      }
+
+      .right-item {
+        justify-content: flex-end;
+      }
+    </style>
   </head>
   <body>
     <!-- 整体背景 -->
     <div class="min-h-screen relative">
+      <!-- 自动播放音乐 -->
+      <audio id="audioPlayer" controls autoplay loop class="w-full mt-4">
+        <source src=static/music.mp3 type="audio/mpeg" /> Your browser does not
+        support the audio element.
+      </audio>
+      <!-- <audio autoplay loop>
+        <source src="./static/music.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio> -->
       <!-- 头像卡片部分 -->
       <div
         class="mt-5 mx-10 p-5 rounded-lg shadow-lg flex flex-col items-center justify-center relative"
@@ -17,7 +48,7 @@
         <div
           class="absolute inset-0 bg-cover bg-center opacity-30"
           style="
-            background-image: url('preview.png');
+            background-image: url('./static/preview.png');
             filter: blur(8px);
             z-index: -1;
           "
@@ -25,16 +56,77 @@
 
         <!-- 头像 -->
         <img
-          src="preview.png"
+          src="./static/preview.png"
           alt="头像"
           class="w-20 h-20 rounded-full border-4 border-white shadow-lg"
         />
 
         <!-- 姓名 -->
-        <div class="text-lg mt-3">陆十九</div>
+        <div class="text-lg mt-3 font-bold text-lg text-orange-400">陆十九</div>
 
-        <div class="bg-white text-black">女性无所不能</div>
+        <div class="text-black font-semibold p-3 mt-4">女性无所不能</div>
+        <div class="text-blue">
+          <button class="border rounded-full p-4 mt-4">
+            <a href="https://music.163.com/#/user/home?id=332727028"
+              >点击进入陆十九的音乐空间</a
+            >
+          </button>
+        </div>
       </div>
+
+      <!-- 时间轴 -->
+      <div class="timeline">
+        <!-- JavaScript 将在此处插入内容 -->
+      </div>
+
+      <!-- 模糊背景 -->
+      <!-- <div
+        class="absolute min-h-screen inset-0 bg-cover bg-center opacity-30"
+        style="background-image: url('bg.png'); filter: blur(8px); z-index: -1"
+      >
+        123123
+      </div> -->
     </div>
+
+    <script>
+      let phrases = [
+        '阅己 越己 悦己',
+        '热爱漫无边际',
+        '灵魂的自由是第一自由',
+        '我想要更大更圆的月亮',
+        '由于时间和地域的关系 我们再见不会超过三十次',
+        '一见如故',
+        '没有理想的人不伤心',
+        '我们会在没有黑暗的地方见面',
+        'Go big or go home',
+        '有幸在这走马观花的世界遇见你',
+        '与JustinBiber在恋爱中',
+        '总之岁月漫长,然而值得等待',
+        '乐命',
+        '真的真的真的',
+        '惊喜大概就是不期而遇后的目光所及',
+        '万人攒动火树银花之处不必找我',
+        '生命中的无上欢喜和灭顶之灾Laijst',
+        '风吹着你想我跑来',
+      ];
+
+      const timeline = document.querySelector('.timeline');
+
+      phrases.forEach((phrase, index) => {
+        const div = document.createElement('div');
+        div.className =
+          'bg-orange-200 opacity-60 text-white font-semibold text-center h-100 w-100 p-20 border text-lg m-8 shadow-sm radius-lg hover:shadow-lg';
+
+        div.innerText = phrase;
+
+        const timelineItem = document.createElement('div');
+        timelineItem.className = `timeline-item ${
+          index % 2 === 0 ? 'left-item' : 'right-item'
+        }`;
+        timelineItem.appendChild(div);
+
+        timeline.appendChild(timelineItem);
+      });
+    </script>
   </body>
 </html>
